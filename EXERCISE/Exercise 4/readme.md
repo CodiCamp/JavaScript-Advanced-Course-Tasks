@@ -2,7 +2,7 @@
 
 ## Features
 
-* Create a singlton (app) structure to control the application - controller
+* Create a singelton (app) structure to control the application - controller
   * method init - called on window load
   * public methods
     * setter methods
