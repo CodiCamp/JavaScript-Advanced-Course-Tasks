@@ -31,7 +31,7 @@
   * representation in the bottom sidebar
   * template to be rendered with
   * unique ID
- * public method exit - destroys all windows
- * public method clean - minimizes active window
- * only one window must be shown at a time
- * create your own style and markup
+* public method exit - destroys all windows
+* public method clean - minimizes active window
+* only one window must be shown at a time
+* create your own style and markup
