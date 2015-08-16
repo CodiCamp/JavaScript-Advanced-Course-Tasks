@@ -13,23 +13,50 @@ var app = app || {};
     var config = {
         el: '.wrapper'
     },
-    
+
         /***
          * Cached App elements
          */
         elements = {},
-    
         instanceStorage = [];
-    
+
     /**
      * Initialize Application
      * @public
      */
     app.init = function () {
-            
+
         cacheElements();
-        setConfig();
-        createLayout();
+        this.bindEvents();
+        app.events.notify('app:layout:cached');
+        app.events.notify('app:ready');
+    };
+
+    app.layout = {};
+
+    /***
+     * Binds apllication wide events
+     */
+    app.bindEvents = function () {
+
+        app.events.listen('app:ready', setConfig.bind(this));
+        app.events.listen('app:layout:cached', createLayout.bind(this));
+    };
+
+    /***
+     * Internal application events
+     */
+    app.events = {
+
+        listen: function (eventName, handler) {
+
+            Events.subscribe(elements.el, eventName, handler);
+        },
+
+        notify: function (eventName) {
+
+            Events.publish(elements.el, eventName);
+        }
     };
 
     /**
@@ -38,8 +65,8 @@ var app = app || {};
      * returns {Object} config
      */
     app.getConfig = function () {
-        
-        return config;  
+
+        return config;
     };
 
     /**
@@ -48,19 +75,25 @@ var app = app || {};
      * returns void
      */
     app.exit = function () {
-        
+
         for (var i = instanceStorage.length - 1; i >= 0; i--) {
             instanceStorage[i].destroy();
         };
     };
-    
+
     /**
      * Create application layout
      */
     function createLayout () {
-        
-        for (var template in app.templates) {
-            instanceStorage.push(new app.view(app.templates[template]));            
+
+        for (var templateName in this.templates.layout) {
+
+            app.layout[templateName] = new this.layoutView({
+                template: this.templates.layout[templateName],
+                name: templateName
+            });
+
+            app.events.notify('view:' + templateName + ':render');
         }
     };
 
@@ -68,7 +101,7 @@ var app = app || {};
      * Get user specific configuration
      */
     function setConfig () {
-        
+
         config.appWidth = global.innerWidth;
         config.appHeight = global.innerHeight;
     }
@@ -77,7 +110,7 @@ var app = app || {};
      * Cache app main elements
      */
     function cacheElements () {
-        
+
         elements.el = doc.querySelector(config.el);
     }
 

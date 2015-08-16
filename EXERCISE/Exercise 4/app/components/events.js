@@ -1,9 +1,7 @@
-window.app = window.app || {};
-
 /***
  * Subsciing and Publishing application events
  */
-app.events = {
+var Events = {
 
     /***
      * Create event
