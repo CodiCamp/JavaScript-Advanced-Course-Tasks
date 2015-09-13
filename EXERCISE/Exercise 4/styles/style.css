@@ -1,0 +1,125 @@
+a {
+    text-decoration: none;
+}
+
+body {
+    overflow-y: hidden;
+}
+
+.wrapper {
+    box-sizing: border-box;
+    /*position: relative;*/
+    width: 100%;
+    padding: 2% 2%;
+    /*background-color: #f0f5f6;*/
+}
+
+.wrapper .menu {
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+    height: 32px;
+    background-color: #ecf0f1;
+}
+
+.wrapper .menu ul {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper .menu li {
+    display: inline-block;
+    vertical-align: top;
+    list-style: none;
+    width: 40px;
+    height: 100%;
+    text-align: center;
+    padding: 14px 10px 0 10px;
+    background-color: #ecf0f1;
+    border-right: 1px solid #ccc;
+}
+
+.wrapper .menu li:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.wrapper .menu li.start a {
+    color: #000;
+    font-size: 1.5em;
+}
+
+.wrapper .menu li a {
+    font-size: 1.3em;
+    color: #31535c;
+}
+
+.window {
+    max-width: 70%;
+    min-width: 400px;
+    border: 1px solid #ccc;
+}
+
+.window .header {
+    position: relative;
+    font-size: 1.2em;
+    padding: 1px 0.2% 4px 3.2%;
+    background-color: #05b4ba;
+    border-bottom: 1px solid #ccc;
+}
+
+.window .header .window-actions {
+    position: absolute;
+    right: 1%;
+    top: 14%;
+}
+
+.window .header .window-actions .action {
+    display: inline-block;
+    padding: 10px 12px 4px 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.window .header .window-actions .action:hover {
+    background-color: #9fc5d1;
+}
+
+.window .header h2 {
+    padding-top: 11px;
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    letter-spacing: 0.2em;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 5px;
+}
+
+.window .content {
+    box-sizing: border-box;
+    padding: 1%;
+    background-color: #fafdfe;
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.3999996185303px;
+}
+
+.window .footer {
+    border-top: 1px solid #ccc;
+    padding: 1%;
+    background-color: #ecf0f1;
+}
+
+.window .sidebar {
+    box-sizing: border-box;
+    padding: 1% 1%;
+    border-right: 1px solid #ccc;
+    background-color: #ecf0f1;
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+}
