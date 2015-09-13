@@ -1,5 +1,5 @@
 /***
- * Layout view
+ * Footer view
  */
 var app = app || {};
 
@@ -9,7 +9,7 @@ var app = app || {};
      * @param {Object} options
      * returns void
      */
-    function layoutView (options) {
+    function footerView (options) {
 
         this.template = options.template;
         this.name = options.name;
@@ -31,5 +31,5 @@ var app = app || {};
         app.events.listen('view:' + this.name + ':render', this.render.bind(this));
     };
 
-    app.layoutView = layoutView;
+    app.footerView = footerView;
 })();

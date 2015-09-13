@@ -88,7 +88,7 @@ var app = app || {};
 
         for (var templateName in this.templates.layout) {
 
-            app.layout[templateName] = new this.layoutView({
+            app.layout[templateName] = new this[templateName + 'View']({
                 template: this.templates.layout[templateName],
                 name: templateName
             });
