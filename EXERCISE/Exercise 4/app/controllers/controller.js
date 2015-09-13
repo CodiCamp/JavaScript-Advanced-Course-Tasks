@@ -43,6 +43,8 @@ var app = app || {};
         app.events.listen('app:layout:cached', createLayout.bind(this));
     };
 
+    app.windowInstances = [];
+
     /***
      * Internal application events
      */

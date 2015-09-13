@@ -1,5 +1,5 @@
 /***
- * Footer view
+ * Content view
  */
 var app = app || {};
 
@@ -9,32 +9,19 @@ var app = app || {};
      * @param {Object} options
      * returns void
      */
-    function footerView (options) {
+    function contentView (options) {
 
         this.template = options.template;
         this.name = options.name;
         this.placeholder = document.getElementById('placeholder-' + options.name);
 
-        /***
-         * Elements selectors
-         */
-        this.selectors = {
-            createNewWindow: '.icon-smile'
-        };
 
-        /***
-         * Store cached elements
-         */
-        this.elements = {
-
-        };
 
         /***
          * Bind event listeners to view elements
          */
         this.bindEvents = function () {
-
-            Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow);
+            app.events.listen('app:window:create', this.createNewWindow);
         };
 
         this.unbindEvents = function () {
@@ -45,10 +32,13 @@ var app = app || {};
          * Create new Windown object
          */
         this.createNewWindow = function () {
-            /***
-             * TO DO HOMEWORK: add icon for each new window
-             */
-            app.events.notify('app:window:create');
+            console.log(2);
+            app.windowInstances.push(new global.windowView({
+                /***
+                 * TO DO Homework: create UNIQUE ID
+                 */
+                id: app.windowInstances.length
+            }));
         };
 
 
@@ -56,8 +46,6 @@ var app = app || {};
 
             this.placeholder.innerHTML = this.template;
             this.el = document.getElementById('template-' + options.name);
-
-            this.elements.createNewWindow = this.el.querySelector(this.selectors.createNewWindow);
 
             this.bindEvents();
         };
@@ -69,5 +57,5 @@ var app = app || {};
         app.events.listen('view:' + this.name + ':render', this.render.bind(this));
     };
 
-    app.footerView = footerView;
+    app.contentView = contentView;
 })(window);
