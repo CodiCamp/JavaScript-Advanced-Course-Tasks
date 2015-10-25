@@ -21,7 +21,7 @@ var app = app || {};
     };
 
     windowView.prototype.render = function() {
-        app.layout.content.el.innerHTML += this.template.join('');
+        app.ContentView.el.innerHTML += this.template.join('');
     };
 
     windowView.prototype.destroy = function() {

@@ -90,12 +90,10 @@ var app = app || {};
 
         for (var templateName in this.templates.layout) {
 
-            app.layout[templateName] = new this[templateName + 'View']({
+            this[templateName + 'View'].init({
                 template: this.templates.layout[templateName],
                 name: templateName
             });
-
-            app.events.notify('view:' + templateName + ':render');
         }
     };
 

@@ -8,8 +8,8 @@ var app = app || {};
 	app.templates = {
 
         layout: {
-            content: '<div id="template-content"></div>',
-    		footer: '<nav class="menu" id="template-footer"><ul><li class="start"><a href="javascript:;" class="icon-smile"></a></li><li class="window-tab"><a href="#" class="icon-browser"></a></li></ul></nav>'
+            Content: '<div id="template-Content"></div>',
+    		Footer: '<nav class="menu" id="template-Footer"><ul><li class="start"><a href="javascript:;" class="icon-smile"></a></li><li class="window-tab"><a href="#" class="icon-browser"></a></li></ul></nav>'
         },
 
         windowTemplate: ['<section class="window" id="test">',
