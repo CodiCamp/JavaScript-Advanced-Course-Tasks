@@ -14,11 +14,11 @@ var app = app || {};
         el: '.wrapper'
     },
 
-        /***
-         * Cached App elements
-         */
-        elements = {},
-        instanceStorage = [];
+    /***
+     * Cached App elements
+     */
+    elements = {},
+    instanceStorage = [];
 
     /**
      * Initialize Application

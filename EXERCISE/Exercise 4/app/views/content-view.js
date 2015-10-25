@@ -16,7 +16,6 @@ var app = app || {};
         this.placeholder = document.getElementById('placeholder-' + options.name);
 
 
-
         /***
          * Bind event listeners to view elements
          */

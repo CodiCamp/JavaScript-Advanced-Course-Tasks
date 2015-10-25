@@ -16,17 +16,16 @@ var app = app || {};
         this.id = options.id;
         this.type = options.type || 'maximized'; //minimized or maximized
 
-        this.render = function () {
-
-            app.layout.content.el.innerHTML += this.template.join('');
-        };
-
-        this.destroy = function  () {
-            console.log('destroy', this.template);
-        };
-
         this.render();
         // app.events.listen('window:' + this.id + ':render', this.render.bind(this));
+    };
+
+    windowView.prototype.render = function() {
+        app.layout.content.el.innerHTML += this.template.join('');
+    };
+
+    windowView.prototype.destroy = function() {
+        console.log('destroy', this.template);
     };
 
     window.windowView = windowView;
