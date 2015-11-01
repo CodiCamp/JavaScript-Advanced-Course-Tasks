@@ -47,6 +47,7 @@ var app = app || {};
 
     /***
      * Internal application events
+     * @param {Object} params
      */
     app.events = {
 
@@ -55,7 +56,7 @@ var app = app || {};
             Events.subscribe(elements.el, eventName, handler);
         },
 
-        notify: function (eventName) {
+        notify: function (eventName,params) {
 
             Events.publish(elements.el, eventName);
         }

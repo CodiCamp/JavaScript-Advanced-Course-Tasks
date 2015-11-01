@@ -9,10 +9,10 @@ var app = app || {};
 
         layout: {
             Content: '<div id="template-Content"></div>',
-    		Footer: '<nav class="menu" id="template-Footer"><ul><li class="start"><a href="javascript:;" class="icon-smile"></a></li><li class="window-tab"><a href="#" class="icon-browser"></a></li></ul></nav>'
+    		Footer: '<nav class="menu" id="template-Footer"><ul><li class="start"><a href="javascript:;" class="icon-smile"></a></li></ul></nav>'
         },
 
-        windowTemplate: ['<section class="window" id="test">',
+        windowTemplate: [
             '<header class="header">',
                 '<div class="window-actions">',
                     '<span class="action icon-dash"></span>',
@@ -31,7 +31,8 @@ var app = app || {};
             '</div>',
             '<footer class="footer">',
                 '<strong> Status bar :) </strong>',
-            '</footer>',
-        '</section>']
+            '</footer>'],
+
+        footerTemplate:'<a href="#" class="icon-browser"></a>'
 	};
 })();

@@ -20,9 +20,10 @@ var Events = {
      * @param {Dom Object} el
      * @param {String} eventName
      * @param {Function} handler
+     * @param {Object} params
      * returns void
      */
-    subscribe: function (el,eventName,handler) {
+    subscribe: function (el,eventName,handler,params) {
 
         el.addEventListener(eventName,handler,false);
     },
@@ -31,9 +32,10 @@ var Events = {
      * Publishes an event to the listneres
      * @param {Dom Object} el
      * @param {String} eventName
+     * @param {Object} params
      * returns void
      */
-    publish: function (el,eventName) {
+    publish: function (el,eventName,params) {
 
         var event = this.create(eventName);
         el.dispatchEvent(event);

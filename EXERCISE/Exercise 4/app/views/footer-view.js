@@ -16,7 +16,12 @@ var app = app || {};
     app.FooterView.events = {
         on: function () {
 
-            Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow);
+            Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow.bind(this));
+            app.events.listen('app:window:destroy', this.destroyWindow.bind(this));
+        },
+
+        off: function () {
+
         }
     };
 
@@ -27,8 +32,28 @@ var app = app || {};
         /***
          * TO DO HOMEWORK: add icon for each new window
          */
+
+        this.createNewIcon();
+        // app.FooterView.el.firstChild.innerHTML += app.templates.footerTemplate;
         app.events.notify('app:window:create');
+
     };
+
+    app.FooterView.createNewIcon = function(){
+        var wrapper=document.createElement('li');
+        wrapper.className='window-tab';
+        wrapper.innerHTML=app.templates.footerTemplate;
+        this.el.firstChild.appendChild(wrapper);
+    };
+
+    app.FooterView.destroyWindow = function () {
+        /***
+         * Need to add code to remove icon
+         */
+
+
+    };
+
 
     /***
      * Store cached elements
@@ -40,6 +65,7 @@ var app = app || {};
      * Elements selectors
      */
     app.FooterView.selectors = {
-        createNewWindow: '.icon-smile'
+        createNewWindow: '.icon-smile',
+        destroyWindow: '.icon-delete-circle'
     };
 })(window,app);
