@@ -23,7 +23,7 @@ var app = app || {};
 
     app.ContentView.createNewWindow = function () {
         console.log(2);
-        app.windowInstances.push(new global.windowView({
+        app.windowInstances.push(global.WindowView.init({
             /***
              * TO DO Homework: create UNIQUE ID
              */

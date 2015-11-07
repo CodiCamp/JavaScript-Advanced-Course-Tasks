@@ -43,6 +43,17 @@ var app = app || {};
         var wrapper=document.createElement('li');
         wrapper.className='window-tab';
         wrapper.innerHTML=app.templates.footerTemplate;
+        var iconcolor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        // function GetRandomColor() {
+        //     var letters = '0123456789ABCDEF'.split('');
+        //     var color = '#';
+        //     for (var i = 0; i < 6; i++ ) {
+        //         color += letters[Math.floor(Math.random() * 16)];
+        //     }
+        //     return color;
+        // }
+        // wrapper.firstChild.style.color = GetRandomColor();
+        wrapper.firstChild.style.color = iconcolor;
         this.el.firstChild.appendChild(wrapper);
     };
 
@@ -50,8 +61,7 @@ var app = app || {};
         /***
          * Need to add code to remove icon
          */
-
-
+         this.wrapper.parentNode.removeChild(this.wrapper);
     };
 
 
@@ -66,6 +76,16 @@ var app = app || {};
      */
     app.FooterView.selectors = {
         createNewWindow: '.icon-smile',
-        destroyWindow: '.icon-delete-circle'
+        destroyWindow: '.window-tab'
     };
+
+    // app.FooterView.iconcolor= function() {
+    //     var letters = '0123456789ABCDEF'.split('');
+    //     var color = '#';
+    //     for (var i = 0; i < 6; i++ ) {
+    //         color += letters[Math.floor(Math.random() * 16)];
+    //     }
+    //     return color;
+    // };
+
 })(window,app);

@@ -23,7 +23,7 @@ var Events = {
      * @param {Object} params
      * returns void
      */
-    subscribe: function (el,eventName,handler,params) {
+    subscribe: function (el,eventName,handler) {
 
         el.addEventListener(eventName,handler,false);
     },
@@ -35,7 +35,7 @@ var Events = {
      * @param {Object} params
      * returns void
      */
-    publish: function (el,eventName,params) {
+    publish: function (el,eventName) {
 
         var event = this.create(eventName);
         el.dispatchEvent(event);
