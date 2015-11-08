@@ -21,8 +21,8 @@ var app = app || {};
 
             this.render();
 
-            this.closeIcon=this.wrapper.querySelector('.icon-delete-circle');
-            Events.subscribe(this.closeIcon, 'click', this.destroy.bind(this));
+            app.events.notify('app:window:created',{id: this.id});
+
             // app.events.listen('window:' + this.id + ':render', this.render.bind(this));
         },
 
@@ -34,6 +34,9 @@ var app = app || {};
            this.wrapper.className='window';
            this.wrapper.innerHTML=this.template.join('');
            app.ContentView.el.appendChild(this.wrapper);
+           this.closeIcon = this.wrapper.querySelector(this.selectors.closeIcon);
+
+           this.events.on.call(this);
         },
 
         /***
@@ -49,7 +52,7 @@ var app = app || {};
         events: {
 
             on: function () {
-
+                Events.subscribe(this.closeIcon, 'click', this.destroy.bind(this));
             },
 
             off: function () {
@@ -58,7 +61,7 @@ var app = app || {};
         },
 
         selectors: {
-
+            closeIcon:'.icon-delete-circle'
         }
     };
 })(window);

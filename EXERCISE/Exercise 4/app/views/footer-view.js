@@ -10,6 +10,23 @@ var app = app || {};
      */
     app.FooterView = Object.create(global.BaseView);
 
+    app.FooterView.render= function () {
+        this.placeholder.innerHTML = this.template;
+        this.el = document.getElementById('template-' + this.name);
+
+        if(this.selectors) {
+            // in contentView selectors is undefined; in footer view we have createNewWindow and destroyWindow as selectors
+            for(var selector in this.selectors) {
+                this.elements[selector] = document.querySelector(this.selectors[selector]);
+            }
+        }
+
+        this.iconList = this.el.firstChild;
+
+        this.events.on.call(this);
+
+    };
+
     /***
      * Bind event listeners to view elements
      */
@@ -18,6 +35,7 @@ var app = app || {};
 
             Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow.bind(this));
             app.events.listen('app:window:destroy', this.destroyWindow.bind(this));
+            app.events.listen('app:window:created', this.createNewIcon.bind(this));
         },
 
         off: function () {
@@ -29,19 +47,21 @@ var app = app || {};
      * Create new Windown object
      */
     app.FooterView.createNewWindow = function () {
-        /***
-         * TO DO HOMEWORK: add icon for each new window
-         */
 
-        this.createNewIcon();
         // app.FooterView.el.firstChild.innerHTML += app.templates.footerTemplate;
         app.events.notify('app:window:create');
 
     };
 
-    app.FooterView.createNewIcon = function(){
+    /***
+     * Creates a new icon in footer
+     * @param  {EventObject} evnt
+     * @return void
+     */
+    app.FooterView.createNewIcon = function(evnt){
         var wrapper=document.createElement('li');
         wrapper.className='window-tab';
+        wrapper.id = evnt.detail.id;
         wrapper.innerHTML=app.templates.footerTemplate;
         var iconcolor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
         // function GetRandomColor() {
@@ -54,14 +74,18 @@ var app = app || {};
         // }
         // wrapper.firstChild.style.color = GetRandomColor();
         wrapper.firstChild.style.color = iconcolor;
-        this.el.firstChild.appendChild(wrapper);
+        this.iconList.appendChild(wrapper);
     };
 
-    app.FooterView.destroyWindow = function () {
+    app.FooterView.destroyWindow = function (evnt) {
+
         /***
          * Need to add code to remove icon
          */
-         this.wrapper.parentNode.removeChild(this.wrapper);
+        var iconToRemove = this.iconList.querySelector('#'+evnt.detail.id);
+
+        iconToRemove.parentNode.removeChild(iconToRemove);
+
     };
 
 

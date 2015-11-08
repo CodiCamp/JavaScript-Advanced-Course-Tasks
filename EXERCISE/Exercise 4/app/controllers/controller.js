@@ -58,7 +58,7 @@ var app = app || {};
 
         notify: function (eventName,params) {
 
-            Events.publish(elements.el, eventName);
+            Events.publish(elements.el, eventName,params);
         }
     };
 
@@ -114,5 +114,7 @@ var app = app || {};
 
         elements.el = doc.querySelector(config.el);
     }
+
+    app.init();
 
 })(window, document);
