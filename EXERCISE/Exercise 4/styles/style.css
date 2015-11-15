@@ -222,6 +222,6 @@ body {
      transition: all .2s ease-in-out;
      transform: scale(1.1);
  }
- .iconhighlight{
+ .wrapper .menu li.iconhighlight{
     background-color: rgba(5,180,186,0.2);
  }
