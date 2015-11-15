@@ -15,13 +15,16 @@ var app = app || {};
         this.el = document.getElementById('template-' + this.name);
 
         if(this.selectors) {
-            // in contentView selectors is undefined; in footer view we have createNewWindow and destroyWindow as selectors
+            // in contentView selectors is undefined; in footer view we have createNewWindow and windowIcon as selectors
             for(var selector in this.selectors) {
                 this.elements[selector] = document.querySelector(this.selectors[selector]);
             }
         }
 
         this.iconList = this.el.firstChild;
+
+        // this.iconToHighlight = this.iconList.querySelector(this.selectors.windowIcon);
+        this.elements.iconToHighlight =this.selectors.windowIcon;
 
         this.events.on.call(this);
 
@@ -34,8 +37,11 @@ var app = app || {};
         on: function () {
 
             Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow.bind(this));
+            // Events.subscribe(this.elements.iconToHighlight, 'click', this.iconHighlight.bind(this));
             app.events.listen('app:window:destroy', this.destroyWindow.bind(this));
             app.events.listen('app:window:created', this.createNewIcon.bind(this));
+
+            // Events.subscribe(this.iconToHighlight,'click', this.iconHighlight.bind(this));
         },
 
         off: function () {
@@ -47,7 +53,6 @@ var app = app || {};
      * Create new Windown object
      */
     app.FooterView.createNewWindow = function () {
-
         // app.FooterView.el.firstChild.innerHTML += app.templates.footerTemplate;
         app.events.notify('app:window:create');
 
@@ -88,28 +93,24 @@ var app = app || {};
 
     };
 
+    app.FooterView.iconHighlight = function () {
+        this.iconToHighlight.classList.add('iconhighlight');
+
+        app.events.notify('app:footericon:highlighted',{ id: this.iconList.id });
+    };
+
 
     /***
      * Store cached elements
      */
     app.FooterView.elements = {
-
     };
     /***
      * Elements selectors
      */
     app.FooterView.selectors = {
         createNewWindow: '.icon-smile',
-        destroyWindow: '.window-tab'
+        windowIcon: '.window-tab'
     };
-
-    // app.FooterView.iconcolor= function() {
-    //     var letters = '0123456789ABCDEF'.split('');
-    //     var color = '#';
-    //     for (var i = 0; i < 6; i++ ) {
-    //         color += letters[Math.floor(Math.random() * 16)];
-    //     }
-    //     return color;
-    // };
 
 })(window,app);

@@ -64,7 +64,9 @@ body {
 .window {
     max-width: 70%;
     min-width: 400px;
+    margin: 0 auto;
     border: 1px solid #ccc;
+    transition: all .2s ease-in-out;
 }
 
 .window .header {
@@ -126,3 +128,100 @@ body {
     background-color: #ecf0f1;
     font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 }
+
+
+/*
+ * Css Animations
+ */
+
+ .animated {
+   -webkit-animation-duration: 2s;
+   animation-duration: 2s;
+   -webkit-animation-fill-mode: both;
+   animation-fill-mode: both;
+ }
+
+ /*
+  * Go Down
+  */
+
+ @-webkit-keyframes fadeOutDown {
+   from {
+     opacity: 1;
+   }
+
+   to {
+     opacity: 0;
+     -webkit-transform: translate3d(0%, 100%, 0);
+     transform: translate3d(-10%, 100%, 0);
+   }
+ }
+
+ @keyframes fadeOutDown {
+   from {
+     opacity: 1;
+   }
+
+   to {
+     opacity: 0;
+     -webkit-transform: translate3d(0%, 100%, 0);
+     transform: translate3d(-10%, 100%, 0);
+   }
+ }
+
+ .fadeOutDown {
+   -webkit-animation-name: fadeOutDown;
+   animation-name: fadeOutDown;
+ }
+
+ @-webkit-keyframes fadeInUp {
+   from {
+     opacity: 0;
+     -webkit-transform: translate3d(0, 100%, 0);
+     transform: translate3d(0, 100%, 0);
+   }
+
+   to {
+     opacity: 1;
+     -webkit-transform: none;
+     transform: none;
+   }
+ }
+
+ /*
+  * Go Up
+  */
+
+ @keyframes fadeInUp {
+   from {
+     opacity: 0;
+     -webkit-transform: translate3d(0, 100%, 0);
+     transform: translate3d(0, 100%, 0);
+   }
+
+   to {
+     opacity: 1;
+     -webkit-transform: none;
+     transform: none;
+   }
+ }
+
+ .fadeInUp {
+   -webkit-animation-name: fadeInUp;
+   animation-name: fadeInUp;
+ }
+
+/*
+ * Highliting
+ */
+
+ /*.window:hover , */
+ .windowhighlight{
+     box-shadow: 0px 0px 26px 0px #05b4ba;
+     /*zoom: 115%;*/
+     transition: all .2s ease-in-out;
+     transform: scale(1.1);
+ }
+ .iconhighlight{
+    background-color: rgba(5,180,186,0.2);
+ }
