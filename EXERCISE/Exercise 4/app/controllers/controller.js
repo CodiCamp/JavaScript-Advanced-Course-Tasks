@@ -47,6 +47,7 @@ var app = app || {};
 
     /***
      * Internal application events
+     * @param {Object} params
      */
     app.events = {
 
@@ -55,9 +56,9 @@ var app = app || {};
             Events.subscribe(elements.el, eventName, handler);
         },
 
-        notify: function (eventName) {
+        notify: function (eventName,params) {
 
-            Events.publish(elements.el, eventName);
+            Events.publish(elements.el, eventName,params);
         }
     };
 
@@ -80,7 +81,7 @@ var app = app || {};
 
         for (var i = instanceStorage.length - 1; i >= 0; i--) {
             instanceStorage[i].destroy();
-        };
+        }
     };
 
     /**
@@ -95,7 +96,7 @@ var app = app || {};
                 name: templateName
             });
         }
-    };
+    }
 
     /**
      * Get user specific configuration
@@ -113,5 +114,7 @@ var app = app || {};
 
         elements.el = doc.querySelector(config.el);
     }
+
+    app.init();
 
 })(window, document);

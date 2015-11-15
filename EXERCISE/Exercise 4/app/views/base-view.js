@@ -28,7 +28,7 @@
             this.el = document.getElementById('template-' + this.name);
 
             if(this.selectors) {
-
+                // in contentView selectors is undefined; in footer view we have createNewWindow and destroyWindow as selectors
                 for(var selector in this.selectors) {
                     this.elements[selector] = document.querySelector(this.selectors[selector]);
                 }

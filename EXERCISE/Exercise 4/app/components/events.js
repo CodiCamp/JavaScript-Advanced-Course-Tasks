@@ -6,11 +6,12 @@ var Events = {
     /***
      * Create event
      * @param {String} eventName
+     * @param {Object} eventDetail
      * returns {Event Object}
      */
-    create: function(eventName){
+    create: function(eventName, eventDetail){
 
-        var event = new CustomEvent(eventName);
+        var event = new CustomEvent(eventName, { detail: eventDetail });
 
         return event;
     },
@@ -20,6 +21,7 @@ var Events = {
      * @param {Dom Object} el
      * @param {String} eventName
      * @param {Function} handler
+     * @param {Object} params
      * returns void
      */
     subscribe: function (el,eventName,handler) {
@@ -27,16 +29,27 @@ var Events = {
         el.addEventListener(eventName,handler,false);
     },
 
+    // elem.addEventListener(eventName, function(e) {
+    //        // in the event handler function here, you can directly refer
+    //        // to arg1 and arg2 from the parent function arguments
+    // }, false);
+
+    // element.addEventListener('click', (function(passedInElement) {
+    //     return function(e) {func(e, passedInElement); };
+    // }) (this.elements[i]), false);
+
+
     /***
      * Publishes an event to the listneres
      * @param {Dom Object} el
      * @param {String} eventName
+     * @param {Object} params
      * returns void
      */
-    publish: function (el,eventName) {
+    publish: function (el,eventName,params) {
 
-        var event = this.create(eventName);
-        el.dispatchEvent(event);
+        var evnt = this.create(eventName, params);
+        el.dispatchEvent(evnt);
 
     },
 
