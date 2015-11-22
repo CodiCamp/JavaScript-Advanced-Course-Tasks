@@ -6,8 +6,8 @@ var app = app || {};
 (function (global, app){
 
     /***
-     * @param {Object} options
-     * returns void
+     * Created ContentView
+     * @returns void
      */
     app.ContentView = Object.create(global.BaseView);
 
@@ -22,6 +22,10 @@ var app = app || {};
         }
     };
 
+    /***
+     * Creates new Instance of WindowView and adds unique id
+     * @returns void
+     */
     app.ContentView.createNewWindow = function () {
         console.log(2);
         var windowInstance = Object.create(global.WindowView);
@@ -38,6 +42,11 @@ var app = app || {};
     //     destroyWindow: '.icon-delete-circle'
     // }
 
+    /***
+     * Removes the current WindowView instance
+     * @param  {EventObject} evnt
+     * @returns void
+     */
     app.ContentView.destroyWindow = function (evnt) {
         console.log(0);
         // this.parentElement.removeChild(this[i]);

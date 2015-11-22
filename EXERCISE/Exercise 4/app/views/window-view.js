@@ -14,7 +14,9 @@ var app = app || {};
         internelMethods: ['destroy', 'minimize', 'maximize', 'highlight'],
 
         /***
-         * Generic initialization method
+         * Window initialization method
+         * @param  {Object} options
+         * @returns void
          */
         init: function (options) {
             this.template = options.template || app.templates.windowTemplate;
@@ -29,6 +31,11 @@ var app = app || {};
             // app.events.listen('window:' + this.id + ':render', this.render.bind(this));
         },
 
+
+        /***
+         * Binds the events of internal methods
+         * @returns void
+         */
         bindInternalMethods: function () {
             var view = this;
 
@@ -39,6 +46,7 @@ var app = app || {};
 
         /***
          * Window render
+         * @returns void
          */
         render: function () {
             this.wrapper=document.createElement('section');
@@ -56,6 +64,7 @@ var app = app || {};
 
         /***
          * Window destroy
+         * @returns void
          */
         destroy: function () {
             this.events.off.call(this);
@@ -65,6 +74,10 @@ var app = app || {};
             app.events.notify('app:window:destroy',{id: this.id});
         },
 
+        /***
+         * Window minimize
+         * @returns void
+         */
         minimize: function(){
             this.resetView();
 
@@ -74,6 +87,10 @@ var app = app || {};
             app.events.notify('app:window:minimized');
         },
 
+        /***
+         * Window reset- removes the extra styles added in code
+         * @returns void
+         */
         resetView: function () {
             var view = this;
             this.wrapper.classList.forEach(function(className){
@@ -83,6 +100,10 @@ var app = app || {};
             });
         },
 
+        /***
+         * Window popup
+         * @returns void
+         */
         popup: function(){
             this.resetView();
 
@@ -92,6 +113,10 @@ var app = app || {};
             // app.events.notify('app:window:popup');
         },
 
+        /***
+         * Window maximize
+         * @returns void
+         */
         maximize: function(){
             if(this.type === "maximized"){
                 this.wrapper.removeAttribute("style");
@@ -106,27 +131,52 @@ var app = app || {};
             }
         },
 
+        /***
+         * Window highlight
+         * @param  {EventObject} evnt
+         * @returns void
+         */
         highlight: function(evnt){
+            this.resetView();
             this.wrapper.classList.add('windowhighlight');
         },
 
+        /***
+         * Window unhighlight
+         * @param  {EventObject} evnt
+         * @returns void
+         */
+        unhighlight: function(evnt){
+            this.wrapper.classList.remove('windowhighlight');
+        },
+
+        /***
+         * Bind event listeners to view elements
+         */
         events: {
 
             on: function () {
                 Events.subscribe(this.closeIcon, 'click', this.destroy);
                 Events.subscribe(this.minimizeIcon, 'click', this.minimize);
                 Events.subscribe(this.maximizeIcon, 'click', this.maximize);
+                app.events.listen('app:footericon:unhighlighted:' + this.id, this.unhighlight);
                 app.events.listen('app:footericon:highlighted:' + this.id, this.highlight);
+
             },
 
             off: function () {
                 Events.unsubscribe(this.closeIcon, 'click', this.destroy);
                 Events.unsubscribe(this.minimizeIcon, 'click', this.minimize);
                 Events.unsubscribe(this.maximizeIcon, 'click', this.maximize);
+                app.events.remove('app:footericon:unhighlighted:' + this.id, this.unhighlight);
                 app.events.remove('app:footericon:highlighted:' + this.id, this.highlight);
+
             }
         },
 
+        /***
+         * Elements selectors
+         */
         selectors: {
             closeIcon:'.icon-delete-circle',
             minimizeIcon: '.icon-dash',
