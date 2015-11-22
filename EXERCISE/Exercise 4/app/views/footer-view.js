@@ -23,8 +23,6 @@ var app = app || {};
 
         this.iconList = this.el.firstChild;
 
-        // this.iconToHighlight = this.iconList.querySelector(this.selectors.windowIcon);
-        this.elements.iconToHighlight =this.selectors.windowIcon;
 
         this.events.on.call(this);
 
@@ -37,7 +35,6 @@ var app = app || {};
         on: function () {
 
             Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow.bind(this));
-            // Events.subscribe(this.elements.iconToHighlight, 'click', this.iconHighlight.bind(this));
             app.events.listen('app:window:destroy', this.destroyWindow.bind(this));
             app.events.listen('app:window:created', this.createNewIcon.bind(this));
 
@@ -54,6 +51,7 @@ var app = app || {};
      */
     app.FooterView.createNewWindow = function () {
         // app.FooterView.el.firstChild.innerHTML += app.templates.footerTemplate;
+
         app.events.notify('app:window:create');
 
     };
@@ -80,6 +78,9 @@ var app = app || {};
         // wrapper.firstChild.style.color = GetRandomColor();
         wrapper.firstChild.style.color = iconcolor;
         this.iconList.appendChild(wrapper);
+
+
+        Events.subscribe(wrapper, 'click', this.iconHighlight);
     };
 
     app.FooterView.destroyWindow = function (evnt) {
@@ -88,15 +89,17 @@ var app = app || {};
          * Need to add code to remove icon
          */
         var iconToRemove = this.iconList.querySelector('#'+evnt.detail.id);
-
+        Events.unsubscribe(iconToRemove,'click',this.iconHighlight);
         iconToRemove.parentNode.removeChild(iconToRemove);
+
+
 
     };
 
     app.FooterView.iconHighlight = function () {
-        this.iconToHighlight.classList.add('iconhighlight');
+        this.classList.add('iconhighlight');
 
-        app.events.notify('app:footericon:highlighted',{ id: this.iconList.id });
+        app.events.notify('app:footericon:highlighted:' + this.id);
     };
 
 
