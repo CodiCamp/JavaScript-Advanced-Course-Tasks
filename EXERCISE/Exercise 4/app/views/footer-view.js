@@ -15,6 +15,7 @@ var app = app || {};
      * @returns void
      */
     app.FooterView.render= function () {
+
         this.placeholder.innerHTML = this.template;
         this.el = document.getElementById('template-' + this.name);
         this.state='highlightedIcon';// highlightedIcon, unhighlightedIcon
@@ -28,7 +29,6 @@ var app = app || {};
 
         this.iconList = this.el.firstChild;
 
-
         this.events.on.call(this);
 
     };
@@ -37,6 +37,7 @@ var app = app || {};
      * Bind event listeners to view elements
      */
     app.FooterView.events = {
+
         on: function () {
 
             Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow.bind(this));
@@ -55,6 +56,7 @@ var app = app || {};
      * @returns void
      */
     app.FooterView.createNewWindow = function () {
+
         this.state='highlightedIcon';
         app.events.notify('app:window:create');
     };
@@ -65,6 +67,7 @@ var app = app || {};
      * @return void
      */
     app.FooterView.createNewIcon = function(evnt){
+
         var wrapper=document.createElement('li');
         wrapper.className='window-tab';
         wrapper.id = evnt.detail.id;
@@ -82,10 +85,30 @@ var app = app || {};
     };
 
     /***
+     * Highlights the current icon in footer
+     * @param  {Object} elm
+     * @return void
+     */
+    app.FooterView.iconHighlight = function (evnt) {
+
+        var elm = evnt.target.parentNode;
+        if (elm.classList.contains('iconhighlight')){
+            elm.classList.remove('iconhighlight');
+            app.events.notify('app:footericon:unhighlighted:' + elm.id);
+        }
+        else {
+            app.FooterView.resetFooter();
+            elm.classList.add('iconhighlight');
+            app.events.notify('app:footericon:highlighted:' + elm.id);
+        }
+    };
+
+    /***
      * What happens when window gets minimized
      * @return void
      */
     app.FooterView.windowMinimized = function(evnt){
+
         if(evnt.detail.id) {
             var currentElement = document.getElementById(evnt.detail.id);
             currentElement.classList.remove('iconhighlight');
@@ -115,6 +138,7 @@ var app = app || {};
      * @return void
      */
     app.FooterView.destroyWindow = function (evnt) {
+
         for (var i = app.FooterView.footerInstances.length - 1; i >= 0; i--) {
             if(app.FooterView.footerInstances[i].id === evnt.detail.id){
                 app.FooterView.footerInstances.splice(i,1);
@@ -128,28 +152,9 @@ var app = app || {};
         iconToRemove.parentNode.removeChild(iconToRemove);
     };
 
-    /***
-     * Highlights the current icon in footer
-     * @param  {Object} elm
-     * @return void
-     */
-    app.FooterView.iconHighlight = function (evnt) {
-        var elm = evnt.target.parentNode;
-        if (elm.classList.contains('iconhighlight')){
-            elm.classList.remove('iconhighlight');
-            app.events.notify('app:footericon:unhighlighted:' + elm.id);
-        }
-        else {
-            app.FooterView.resetFooter();
-            elm.classList.add('iconhighlight');
-            app.events.notify('app:footericon:highlighted:' + elm.id);
-        }
-    };
-
     // app.FooterView.checkState = function (elm){
 
     // };
-
 
     /***
      * Store cached elements
@@ -163,6 +168,7 @@ var app = app || {};
      * Elements selectors
      */
     app.FooterView.selectors = {
+
         createNewWindow: '.icon-smile',
         windowIcon: '.window-tab'
     };

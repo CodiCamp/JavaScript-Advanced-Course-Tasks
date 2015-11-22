@@ -8,11 +8,13 @@ var app = app || {};
 	app.templates = {
 
         layout: {
+
             Content: '<div id="template-Content"></div>',
     		Footer: '<nav class="menu" id="template-Footer"><ul><li class="start"><a href="javascript:;" class="icon-smile"></a></li></ul></nav>'
         },
 
         windowTemplate: [
+
             '<header class="header">',
                 '<div class="window-actions">',
                     '<span class="action icon-dash"></span>',

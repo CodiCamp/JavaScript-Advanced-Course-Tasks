@@ -63,10 +63,10 @@ body {
 
 .window {
     position: absolute;
-    top: 70px;
+    /*top: 70px;*/
     left: 50%;
     transform: translate(-50%, 0);
-    width: 70%;
+    width: 80%;
     border: 1px solid #ccc;
     transition: all .2s ease-in-out;
 }
@@ -135,7 +135,6 @@ body {
 /*
  * Css Animations
  */
-
  .animated {
    -webkit-animation-duration: 0.5s;
    animation-duration: 0.5s;
@@ -146,7 +145,6 @@ body {
  /*
   * Go Down
   */
-
  @-webkit-keyframes fadeOutDown {
    from {
      opacity: 1;
@@ -193,7 +191,6 @@ body {
  /*
   * Go Up
   */
-
  @keyframes fadeInUp {
    from {
      opacity: 0;
@@ -217,11 +214,11 @@ body {
  * Highliting
  */
 
- /*.window:hover , */
  .windowhighlight{
-     box-shadow: 0px 0px 26px 0px #05b4ba;
+     box-shadow: 0px 0px 10px 0px #05b4ba;
      transition: all .2s ease-in-out;
  }
+
  .wrapper .menu li.iconhighlight{
     background-color: rgba(5,180,186,0.2);
  }
@@ -229,7 +226,6 @@ body {
 /*
  * Hidden Window by initialization
  */
-
  .hidden{
   display: none;
  }
