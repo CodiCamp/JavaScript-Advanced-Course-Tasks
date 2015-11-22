@@ -42,8 +42,7 @@ var app = app || {};
             Events.subscribe(this.elements.createNewWindow, 'click', this.createNewWindow.bind(this));
             app.events.listen('app:window:destroy', this.destroyWindow.bind(this));
             app.events.listen('app:window:created', this.createNewIcon.bind(this));
-
-            // Events.subscribe(this.iconToHighlight,'click', this.iconHighlight.bind(this));
+            app.events.listen('app:window:minimized', this.windowMinimized);
         },
 
         off: function () {
@@ -56,10 +55,8 @@ var app = app || {};
      * @returns void
      */
     app.FooterView.createNewWindow = function () {
-        // app.FooterView.el.firstChild.innerHTML += app.templates.footerTemplate;
         this.state='highlightedIcon';
         app.events.notify('app:window:create');
-
     };
 
     /***
@@ -73,35 +70,39 @@ var app = app || {};
         wrapper.id = evnt.detail.id;
         wrapper.innerHTML=app.templates.footerTemplate;
         var iconcolor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-        // function GetRandomColor() {
-        //     var letters = '0123456789ABCDEF'.split('');
-        //     var color = '#';
-        //     for (var i = 0; i < 6; i++ ) {
-        //         color += letters[Math.floor(Math.random() * 16)];
-        //     }
-        //     return color;
-        // }
-        // wrapper.firstChild.style.color = GetRandomColor();
+
         wrapper.firstChild.style.color = iconcolor;
         this.iconList.appendChild(wrapper);
         app.FooterView.footerInstances.push({id: wrapper.id});
 
         this.resetFooter();
 
-        wrapper.classList.add("iconHighlight");
-        Events.subscribe(wrapper, 'click', this.iconHighlight(wrapper));
+        wrapper.classList.add("iconhighlight");
+        Events.subscribe(wrapper, 'click', this.iconHighlight);
     };
 
+    /***
+     * What happens when window gets minimized
+     * @return void
+     */
+    app.FooterView.windowMinimized = function(evnt){
+        if(evnt.detail.id) {
+            var currentElement = document.getElementById(evnt.detail.id);
+            currentElement.classList.remove('iconhighlight');
+        }
+    },
     /***
      * Creates a new icon in footer
      * @return void
      */
     app.FooterView.resetFooter = function(){
-        // var footerview = this.el;
+
         for (var i = app.FooterView.footerInstances.length - 1; i >= 0; i--) {
             var currentElement = document.getElementById(app.FooterView.footerInstances[i].id);
+
             currentElement.classList.forEach(function(className){
                 if(className !== 'window-tab') {
+                    app.events.notify('app:footericon:unhighlighted:' + app.FooterView.footerInstances[i].id);
                     currentElement.classList.remove(className);
                 }
             });
@@ -132,21 +133,22 @@ var app = app || {};
      * @param  {Object} elm
      * @return void
      */
-    app.FooterView.iconHighlight = function (elm) {
-        if(elm.classList.contains('iconhighlight')){
+    app.FooterView.iconHighlight = function (evnt) {
+        var elm = evnt.target.parentNode;
+        if (elm.classList.contains('iconhighlight')){
             elm.classList.remove('iconhighlight');
             app.events.notify('app:footericon:unhighlighted:' + elm.id);
         }
-        else{
-            this.resetFooter();
+        else {
+            app.FooterView.resetFooter();
             elm.classList.add('iconhighlight');
             app.events.notify('app:footericon:highlighted:' + elm.id);
         }
     };
 
-    app.FooterView.checkState = function (elm){
+    // app.FooterView.checkState = function (elm){
 
-    };
+    // };
 
 
     /***

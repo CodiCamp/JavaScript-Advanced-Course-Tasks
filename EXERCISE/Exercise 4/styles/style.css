@@ -62,9 +62,11 @@ body {
 }
 
 .window {
-    max-width: 70%;
-    min-width: 400px;
-    margin: 0 auto;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 70%;
     border: 1px solid #ccc;
     transition: all .2s ease-in-out;
 }
@@ -135,8 +137,8 @@ body {
  */
 
  .animated {
-   -webkit-animation-duration: 2s;
-   animation-duration: 2s;
+   -webkit-animation-duration: 0.5s;
+   animation-duration: 0.5s;
    -webkit-animation-fill-mode: both;
    animation-fill-mode: both;
  }
@@ -152,8 +154,8 @@ body {
 
    to {
      opacity: 0;
-     -webkit-transform: translate3d(0%, 100%, 0);
-     transform: translate3d(-10%, 100%, 0);
+     -webkit-transform: translate(-50%, 100%);
+     transform: translate(-50%, 100%);
    }
  }
 
@@ -164,8 +166,8 @@ body {
 
    to {
      opacity: 0;
-     -webkit-transform: translate3d(0%, 100%, 0);
-     transform: translate3d(-10%, 100%, 0);
+     -webkit-transform: translate(-50%, 100%);
+     transform: translate(-50%, 100%);
    }
  }
 
@@ -177,14 +179,14 @@ body {
  @-webkit-keyframes fadeInUp {
    from {
      opacity: 0;
-     -webkit-transform: translate3d(0, 100%, 0);
-     transform: translate3d(0, 100%, 0);
+     -webkit-transform: translate(-50%, 100%);
+     transform: translate(-50%, 100%);
    }
 
    to {
      opacity: 1;
-     -webkit-transform: none;
-     transform: none;
+     -webkit-transform: translate(-50%, 0);
+     transform: translate(-50%, 0);
    }
  }
 
@@ -195,14 +197,14 @@ body {
  @keyframes fadeInUp {
    from {
      opacity: 0;
-     -webkit-transform: translate3d(0, 100%, 0);
-     transform: translate3d(0, 100%, 0);
+     -webkit-transform: translate(-50%, 100%);
+     transform: translate(-50%, 100%);
    }
 
    to {
      opacity: 1;
-     -webkit-transform: none;
-     transform: none;
+     -webkit-transform: translate(-50%, 0);
+     transform: translate(-50%, 0);
    }
  }
 
@@ -218,9 +220,7 @@ body {
  /*.window:hover , */
  .windowhighlight{
      box-shadow: 0px 0px 26px 0px #05b4ba;
-     /*zoom: 115%;*/
      transition: all .2s ease-in-out;
-     transform: scale(1.1);
  }
  .wrapper .menu li.iconhighlight{
     background-color: rgba(5,180,186,0.2);

@@ -11,7 +11,7 @@ var app = app || {};
 
     global.WindowView = {
 
-        internelMethods: ['destroy', 'minimize', 'maximize', 'highlight'],
+        internelMethods: ['destroy', 'minimize', 'maximize', 'highlight', 'unhighlight'],
 
         /***
          * Window initialization method
@@ -58,6 +58,7 @@ var app = app || {};
             this.minimizeIcon = this.wrapper.querySelector(this.selectors.minimizeIcon);
             this.maximizeIcon = this.wrapper.querySelector(this.selectors.maximizeIcon);
 
+            this.wrapper.classList.add('windowhighlight');
 
             this.events.on.call(this);
         },
@@ -84,7 +85,9 @@ var app = app || {};
             this.wrapper.classList.add('fadeOutDown');
             this.wrapper.classList.add('animated');
 
-            app.events.notify('app:window:minimized');
+            app.events.notify('app:window:minimized', {
+                id: this.id
+            });
         },
 
         /***
@@ -138,6 +141,7 @@ var app = app || {};
          */
         highlight: function(evnt){
             this.resetView();
+            this.popup();
             this.wrapper.classList.add('windowhighlight');
         },
 
@@ -147,7 +151,8 @@ var app = app || {};
          * @returns void
          */
         unhighlight: function(evnt){
-            this.wrapper.classList.remove('windowhighlight');
+            this.minimize();
+            // this.wrapper.classList.remove('windowhighlight');
         },
 
         /***
