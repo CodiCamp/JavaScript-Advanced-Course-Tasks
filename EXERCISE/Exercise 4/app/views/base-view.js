@@ -13,6 +13,7 @@
          * Generic initialization method
          */
         init: function (options) {
+
             this.template = options.template;
             this.name = options.name;
             this.placeholder = document.getElementById('placeholder-' + options.name);
@@ -24,6 +25,7 @@
          * Generic render
          */
         render: function () {
+
             this.placeholder.innerHTML = this.template;
             this.el = document.getElementById('template-' + this.name);
 
@@ -41,8 +43,8 @@
          * Generic destroy
          */
         destroy: function () {
-            console.log('destroy', this.template);
 
+            // console.log('destroy', this.template);
             this.events.off();
         },
 

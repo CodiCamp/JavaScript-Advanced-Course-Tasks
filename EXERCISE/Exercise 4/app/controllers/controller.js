@@ -11,6 +11,7 @@ var app = app || {};
      * Base app config
      */
     var config = {
+
         el: '.wrapper'
     },
 
